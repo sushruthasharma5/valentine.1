@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forever Us ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#000;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* CINEMATIC INTRO */
+#intro{
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle,#1a001f,#000);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    z-index:999;
+    animation:fadeOut 2s ease 4s forwards;
+}
+
+#intro h1{
+    font-family:'Great Vibes',cursive;
+    font-size:4rem;
+    color:#ff9ecb;
+    animation:zoomIn 3s ease;
+}
+
+@keyframes zoomIn{
+    from{transform:scale(.5);opacity:0}
+    to{transform:scale(1);opacity:1}
+}
+
+@keyframes fadeOut{
+    to{opacity:0;visibility:hidden}
+}
+
+section{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px 20px;
+}
+
+.card{
+    background:rgba(255,255,255,.07);
+    backdrop-filter:blur(20px);
+    border-radius:30px;
+    padding:60px;
+    max-width:850px;
+    text-align:center;
+    box-shadow:0 25px 80px rgba(255,0,128,.35);
+}
+
+h2{
+    font-family:'Great Vibes',cursive;
+    font-size:3rem;
+    color:#ffb3d9;
+    margin-bottom:20px;
+}
+
+p{line-height:1.8;font-size:1.1rem}
+
+/* TIMELINE */
+.timeline{
+    display:grid;
+    gap:25px;
+}
+
+.memory{
+    padding:25px;
+    border-radius:20px;
+    background:rgba(255,255,255,.05);
+}
+
+/* BUTTONS */
+.btn{
+    margin-top:30px;
+    padding:16px 38px;
+    border:none;
+    border-radius:999px;
+    font-size:1rem;
+    cursor:pointer;
+}
+
+.yes{
+    background:linear-gradient(45deg,#ff4d8d,#ff758c);
+    color:white;
+}
+
+.no{
+    position:absolute;
+    background:rgba(255,255,255,.15);
+    color:white;
+}
+
+/* ROSE PETALS */
+.petal{
+    position:fixed;
+    top:-20px;
+    font-size:18px;
+    animation:fall linear forwards;
+}
+
+@keyframes fall{
+    to{transform:translateY(110vh) rotate(360deg);opacity:.7}
+}
+
+/* FIREWORKS HEARTS */
+.heart{
+    position:fixed;
+    font-size:24px;
+    animation:explode 1s ease-out forwards;
+}
+
+@keyframes explode{
+    to{
+        transform:translate(var(--x),var(--y));
+        opacity:0;
+    }
+}
+
+.success{
+    display:none;
+    font-family:'Great Vibes',cursive;
+    font-size:2.8rem;
+    margin-top:25px;
+    color:#ff9ecb;
+}
+
+.hint{
+    position:fixed;
+    bottom:10px;
+    width:100%;
+    text-align:center;
+    font-size:.7rem;
+    color:#aaa;
+}
+
+img{
+    width:100%;
+    border-radius:20px;
+    margin-top:20px;
+}
+
+</style>
+</head>
+<body>
+
+<div id="intro">
+<h1>For My Forever ❤️</h1>
+<p>Turn on sound...</p>
+</div>
+
+<!-- Use your legally downloaded Gamanava song -->
+<audio id="music" loop>
+<source src="gamanava.mp3" type="audio/mpeg">
+</audio>
+
+<div class="hint">Tap anywhere to start music 🎵</div>
+
+<section>
+<div class="card">
+<h2>Our Story</h2>
+<div class="timeline">
+<div class="memory">7 years ago — destiny introduced us.</div>
+<div class="memory">We laughed, fought, grew… together.</div>
+<div class="memory">2.5 years ago — I married my best friend.</div>
+<div class="memory">Every day since — you are still my safest place.</div>
+</div>
+</div>
+</section>
+
+<section>
+<div class="card">
+<h2>A Lifetime To Go...</h2>
+<p>
+In every universe, in every lifetime —
+I would still find you.
+And I would still choose you.
+</p>
+
+<!-- ADD YOUR PHOTO HERE -->
+<!-- Replace photo.jpg with your image -->
+<img src="photo.jpg" alt="Our Memory">
+</div>
+</section>
+
+<section>
+<div class="card" id="finalCard" style="position:relative">
+<h2>Will You Be My Valentine?</h2>
+<button class="btn yes" id="yesBtn">YES, ALWAYS 💍</button>
+<button class="btn no" id="noBtn">NO 😜</button>
+<div class="success" id="success">Best YES of my life ❤️</div>
+</div>
+</section>
+
+<script>
+const music=document.getElementById('music');
+window.addEventListener('click',()=>music.play().catch(()=>{}),{once:true});
+
+/* ROSE PETALS */
+setInterval(()=>{
+    const petal=document.createElement('div');
+    petal.className='petal';
+    petal.innerHTML='🌹';
+    petal.style.left=Math.random()*100+'vw';
+    petal.style.animationDuration=(Math.random()*5+5)+'s';
+    document.body.appendChild(petal);
+    setTimeout(()=>petal.remove(),10000);
+},400);
+
+/* RUNAWAY NO */
+const no=document.getElementById('noBtn');
+const card=document.getElementById('finalCard');
+
+function move(){
+    const rect=card.getBoundingClientRect();
+    no.style.left=Math.random()*(rect.width-120)+'px';
+    no.style.top=Math.random()*(rect.height-60)+'px';
+}
+
+no.addEventListener('mouseover',move);
+no.addEventListener('click',move);
+no.addEventListener('touchstart',move);
+
+/* FIREWORK HEARTS */
+const yes=document.getElementById('yesBtn');
+const success=document.getElementById('success');
+
+yes.onclick=()=>{
+    success.style.display='block';
+
+    for(let i=0;i<60;i++){
+        const h=document.createElement('div');
+        h.className='heart';
+        h.innerHTML='💖';
+        h.style.left='50vw';
+        h.style.top='50vh';
+        h.style.setProperty('--x',(Math.random()*600-300)+'px');
+        h.style.setProperty('--y',(Math.random()*600-300)+'px');
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),1000);
+    }
+}
+</script>
+
+</body>
+</html>
